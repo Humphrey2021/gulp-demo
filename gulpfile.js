@@ -69,7 +69,7 @@ const style = () => {
     return src('src/assets/styles/*.scss', { base: 'src' })
         .pipe(sass())
         .pipe(dest('temp'))
-        .pipe(bs.reload({ stream: true }))
+        .pipe(bs.reload({ stream: true })) // 更改页面后浏览器更新
 }
 
 // 处理js文件
@@ -79,7 +79,7 @@ const script = () => {
         // 写法换了啊  @babel-preset-env ==> @babel/env
         .pipe(plugins.babel({ presets: ['@babel/env'] }))
         .pipe(dest('temp'))
-        .pipe(bs.reload({ stream: true }))
+        .pipe(bs.reload({ stream: true })) // 更改页面后浏览器更新
 }
 
 // 处理模版文件
@@ -87,10 +87,10 @@ const page = () => {
     return src('src/*.html', { base: 'src' })
         .pipe(plugins.swig({ data, defaults: { cache: false } })) // 防止模板缓存导致页面不能及时更新
         .pipe(dest('temp'))
-        .pipe(bs.reload({ stream: true }))
+        .pipe(bs.reload({ stream: true })) // 更改页面后浏览器更新
 }
 
-// 图片转换
+// 图片压缩
 const image = () => {
     return src('src/assets/images/**', { base: 'src' })
         .pipe(plugins.imagemin())
